@@ -57,10 +57,10 @@ namespace JwtBaseApiNetCore.Controllers
             try
             {
                 var claims = new[]
-                    {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            };
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
 
                 SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
                 SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -100,7 +100,7 @@ namespace JwtBaseApiNetCore.Controllers
             }
         }
 
-        [HttpPost("registro")]
+        [HttpPost("register")]
         public async Task<IActionResult> Registro([FromBody] RegisterRequest user)
         {
             try
@@ -178,7 +178,7 @@ namespace JwtBaseApiNetCore.Controllers
 
                 string newToken = GenerateToken(sessionRequest.Email);
 
-                if (string.IsNullOrEmpty(newToken)) throw new Exception("Ocurrió un error al momento de generar el token") ;
+                if (string.IsNullOrEmpty(newToken)) throw new Exception("Ocurrió un error al momento de generar el token");
                 var newTokenExpirationTime = DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds();
 
                 return Ok(new
@@ -189,7 +189,7 @@ namespace JwtBaseApiNetCore.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500,e.Message);
+                return StatusCode(500, e.Message);
             }
 
         }

@@ -35,7 +35,12 @@ namespace JwtBaseApiNetCore.Controllers
             }
             return false;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         private static bool ByteArraysEqual(byte[] a, byte[] b)
         {
             if (ReferenceEquals(a, b))
@@ -51,7 +56,11 @@ namespace JwtBaseApiNetCore.Controllers
             }
 
             return areEqual;
-        }
+        }/// <summary>
+         /// 
+         /// </summary>
+         /// <param name="email"></param>
+         /// <returns></returns>
         private string GenerateToken(string email)
         {
             try
@@ -80,12 +89,20 @@ namespace JwtBaseApiNetCore.Controllers
                 return String.Empty;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="mongoDBService"></param>
         public UsersController(IConfiguration config, MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
             _config = config;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("users")]
         public async Task<List<User>> Get()
@@ -99,7 +116,11 @@ namespace JwtBaseApiNetCore.Controllers
                 return new List<User>();
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Registro([FromBody] RegisterRequest user)
         {
@@ -130,7 +151,11 @@ namespace JwtBaseApiNetCore.Controllers
             }
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
